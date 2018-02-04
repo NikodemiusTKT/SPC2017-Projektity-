@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="harjoitustyo.PackageGuiController">
+   <children>
+      <HBox prefHeight="65.0" prefWidth="850.0" spacing="10.0">
+         <children>
+            <VBox spacing="5.0">
+               <children>
+                  <Label text="Pakettien käsittely">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label text="Valitse muokattava paketti">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <HBox spacing="10.0">
+                     <children>
+                        <ComboBox fx:id="packageChoice" prefWidth="150.0" promptText="Valitse paketti" />
+                        <Button fx:id="modifyPackageBt" mnemonicParsing="false" text="Muokkaa" />
+                        <Button fx:id="removePackageBt" mnemonicParsing="false" text="Poista" />
+                     </children>
+                  </HBox>
+                  <HBox spacing="10.0" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <GridPane hgap="10.0" vgap="10.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="30.0" prefHeight="60.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="200.0" prefHeight="200.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <Label text="Valitse esine:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Valitse pakettiluokka:" GridPane.columnIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="itemChoice" prefHeight="26.0" prefWidth="206.0" promptText="Esineet" GridPane.rowIndex="1" />
+            <HBox prefHeight="20.0" prefWidth="430.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <RadioButton fx:id="radioFirstClass" mnemonicParsing="false" selected="true" text="1. Luokka">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="classChoices" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="radioSecondClass" mnemonicParsing="false" text="2. Luokka" toggleGroup="$classChoices" />
+                  <RadioButton fx:id="radioThirdClass" mnemonicParsing="false" text="3. Luokka" toggleGroup="$classChoices" />
+               </children>
+            </HBox>
+            <Label text="Luo uusi esine:" GridPane.rowIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" text="Paketin sisältämät esineet" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <VBox prefHeight="164.0" prefWidth="340.0" spacing="10.0" GridPane.rowIndex="4">
+               <children>
+                  <Label text="Esineen nimi" />
+                  <TextField fx:id="itemNameInput" promptText="Nimi">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Koko" />
+                  <HBox prefHeight="19.0" prefWidth="340.0" spacing="10.0">
+                     <children>
+                        <TextField fx:id="lengthInput" promptText="Pituus cm" />
+                        <TextField fx:id="widthInput" promptText="leveys cm" />
+                        <TextField fx:id="heightInput" promptText="korkeus cm" />
+                     </children>
+                  </HBox>
+                  <Label text="Paino" />
+                  <HBox prefHeight="6.0" prefWidth="340.0">
+                     <children>
+                        <TextField fx:id="weightInput" prefHeight="26.0" prefWidth="163.0" promptText="massa kg" />
+                     </children>
+                  </HBox>
+                  <CheckBox fx:id="fragileChoice" mnemonicParsing="false" text="Särkyvä" />
+               </children>
+            </VBox>
+            <VBox prefHeight="171.0" prefWidth="430.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="nameColumn" prefWidth="144.0" text="Nimi" />
+                        <TableColumn fx:id="sizeColumn" prefWidth="103.0" text="Koko" />
+                        <TableColumn fx:id="weightColumn" prefWidth="79.0" text="Massa" />
+                        <TableColumn fx:id="fragileColumn" prefWidth="128.0" text="Särkyvä" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+               <children>
+                  <Button fx:id="createNewItemBt" mnemonicParsing="false" text="Luo esine" />
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <children>
+                  <Button fx:id="removeItemBt" mnemonicParsing="false" text="Poista valittu esine" />
+               </children>
+            </HBox>
+            <VBox prefHeight="14.0" prefWidth="365.0" spacing="5.0" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <children>
+                  <HBox spacing="10.0">
+                     <children>
+                        <Button fx:id="addItemBt" alignment="TOP_LEFT" mnemonicParsing="false" text="Lisää esine" />
+                        <Button fx:id="modifyItemBt" mnemonicParsing="false" text="Muokkaa esinettä" />
+                        <Button fx:id="deleteItemBt" mnemonicParsing="false" text="Poista esine" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Label fx:id="classLabel" text="Luokkatiedot">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <HBox spacing="10.0">
+                     <children>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Nopeus">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="speedLabel" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Matkarajoitus">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="distLabel" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Kokorajoitus">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="sizeLabel" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Painorajoitus">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="weightLabel" />
+                           </children>
+                        </VBox>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label text="Särkyvää">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="fragLabel" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </GridPane>
+      <GridPane alignment="CENTER" hgap="10.0" vgap="10.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.0" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="334.0" minWidth="0.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="381.0" minWidth="10.0" prefWidth="200.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Paketin reittitiedot:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="startCityChoice" prefHeight="26.0" prefWidth="250.0" promptText="Lähtökaupunki" GridPane.rowIndex="1" />
+            <ComboBox fx:id="startPostChoice" prefHeight="26.0" prefWidth="250.0" promptText="Lähtöautomaatti" GridPane.rowIndex="2" />
+            <ComboBox fx:id="endCityChoice" prefHeight="26.0" prefWidth="250.0" promptText="Kohdekaupunki" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ComboBox fx:id="endPostChoice" prefHeight="26.0" prefWidth="250.0" promptText="Kohdeautomaatti" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="changePlacesBt" mnemonicParsing="false" text="Vaihda paikat" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <VBox alignment="CENTER" prefHeight="32.0" prefWidth="97.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <children>
+                  <Label alignment="TOP_LEFT" text="Etäisyys">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="cuDistLabel" />
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </GridPane>
+      <HBox prefHeight="0.0" prefWidth="800.0" spacing="10.0">
+         <children>
+            <Button fx:id="createPackageBt" mnemonicParsing="false" text="Luo uusi paketti" />
+            <Button fx:id="CancelBt" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#closeWindow" text="Poistu" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

@@ -1,0 +1,126 @@
+CREATE TABLE IF NOT EXISTS PostNumberTable (
+    PostId INTEGER PRIMARY KEY NOT NULL,
+    PostNumber VARCHAR NOT NULL,
+    City VARCHAR NOT NULL
+);
+CREATE TABLE IF NOT EXISTS Coordinates (
+    CoordId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    Longitude REAL NOT NULL,
+    Latitude REAL NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Shipment (
+    ShipId INTEGER PRIMARY KEY NOT NULL,
+    shipTime DATETIME DEFAULT (DATETIME('now','localtime')),
+    hasBeenSent BOOLEAN DEFAULT 0,
+    CHECK (hasBeenSent IN (0,1))
+);
+
+
+CREATE TABLE IF NOT EXISTS Location (
+    LocId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    StreetAddress VARCHAR NOT NULL,
+    PostId INTEGER NOT NULL,
+    CoordId INTEGER NOT NULL,
+    FOREIGN KEY (PostId) REFERENCES PostNumberTable(PostId),
+    FOREIGN KEY (CoordId) REFERENCES Coordinates(CoordId)
+);
+
+CREATE TABLE IF NOT EXISTS SmartPost (
+    OfficeId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    OfficeName VARCHAR NOT NULL,
+    LocId INTEGER NOT NULL,
+    Availability VARCHAR NOT NULL,
+    FOREIGN KEY (LocId) REFERENCES Location(LocId) ON DELETE RESTRICT
+);
+
+/* SmartPost entries end here */
+/*************************************/
+/*************************************/
+
+CREATE TABLE IF NOT EXISTS Road (
+    RoadId INTEGER PRIMARY KEY NOT NULL,
+    Distance REAL,
+    StartPoint INTEGER NOT NULL,
+    EndPoint INTEGER NOT NULL,
+    FOREIGN KEY (StartPoint) REFERENCES SmartPost(OfficeId),
+    FOREIGN KEY (EndPoint) REFERENCES SmartPost(OfficeId),
+    CHECK (StartPoint != EndPoint)
+
+);
+CREATE TABLE IF NOT EXISTS Class (
+    ClassId INTEGER PRIMARY KEY NOT NULL,
+    Speed INTEGER NOT NULL,
+    WeightLimit REAL NOT NULL,
+    DistanceLimit REAL NOT NULL,
+    VolumeLimit REAL NOT NULL,
+    Breakable BOOLEAN DEFAULT 0,
+    CHECK (Breakable IN (0,1))
+);
+
+CREATE TABLE IF NOT EXISTS Package (
+    PackageId INTEGER PRIMARY KEY NOT NULL,
+    ClassId  INTEGER NOT NULL,
+    RoadId INTEGER NOT NULL,
+    CreateTime DATETIME DEFAULT (DATETIME('now','localtime')),
+    Sent BOOLEAN DEFAULT 0,
+    CHECK (Sent IN (0,1)),
+    FOREIGN KEY (ClassId) REFERENCES Class(ClassId),
+    FOREIGN KEY (RoadId) REFERENCES Road(RoadId) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Packages (
+    PackageId INTEGER PRIMARY KEY NOT NULL,
+    ShipId INTEGER NOT NULL,
+    FOREIGN KEY (PackageId) REFERENCES Package(PackageId) ON DELETE CASCADE,
+    FOREIGN KEY (ShipId) REFERENCES Shipment(ShipId) ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE IF NOT EXISTS Dimensions (
+    "Size" VARCHAR(3) PRIMARY KEY NOT NULL,
+    Height REAL NOT NULL,
+    Width REAL NOT NULL,
+    "Depth" REAL NOT NULL,
+    Weight REAL NOT NULL
+);
+CREATE TABLE IF NOT EXISTS Item (
+    ItemId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    ItemName VARCHAR NOT NULL,
+    Weight FLOAT NOT NULL,
+    "Length" FLOAT NOT NULL,
+    Width FLOAT NOT NULL,
+    Height REAL NOT NULL,
+    Fragile BOOLEAN DEFAULT 0,
+    CHECK (Fragile IN (0,1))
+);
+
+
+CREATE TABLE IF NOT EXISTS Items (
+    ItemsId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    PackageId INTEGER NOT NULL,
+    ItemId INTEGER NOT NULL,
+    ItemIsBroken BOOLEAN NOT NULL,
+    CHECK (ItemIsBroken IN (0,1)),
+    FOREIGN KEY (PackageId) REFERENCES Package(PackageId) ON DELETE CASCADE,
+    FOREIGN KEY (ItemId) REFERENCES Item(ItemId) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS LogTable (
+    LogId INTEGER PRIMARY KEY NOT NULL,
+    LogTime DATETIME DEFAULT (DATETIME('now','localtime')),
+    LogType VARCHAR NOT NULL,
+    Description VARCHAR NOT NULL
+);
+
+
+
+INSERT INTO Class VALUES (1,1,20,150,79920,0);
+INSERT INTO Class VALUES (2,2,50,1000,41040,1);
+INSERT INTO Class VALUES (3,3,100,500,360000,0);
+INSERT INTO Item VALUES (1,"Portal Gun",20,10,10,10,0);
+INSERT INTO Item VALUES (2,"Mjölnir",40,10,30,40,0);
+INSERT INTO Item VALUES (3,"Muumimuki",0.2,5,5,10,1);
+INSERT INTO Item VALUES (4,"Wusthof Ikon kokkiveitsi",0.5,30,5,10,0);
+INSERT INTO Item VALUES (5,"AK-47",3.5,88,20,10,0);

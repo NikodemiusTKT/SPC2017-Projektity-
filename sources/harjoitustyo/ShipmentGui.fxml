@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="720.0" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="harjoitustyo.ShipmentGuiController">
+   <children>
+      <VBox spacing="10.0">
+         <children>
+            <HBox prefHeight="30.0" prefWidth="580.0" spacing="10.0">
+               <children>
+                  <Label text="Lähetykset">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox spacing="10.0">
+               <children>
+                  <ComboBox fx:id="shipmentChoice" prefHeight="26.0" prefWidth="216.0" promptText="Valitse vanha kuljetus" />
+                  <Button fx:id="zeroChoiceBt" mnemonicParsing="false" text="Nollaa valinta" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <TableView fx:id="shipTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="DtColum" prefWidth="150.0" text="Luotu" />
+          <TableColumn fx:id="IdColumn" text="PakettiId" />
+            <TableColumn fx:id="classColumn" text="Luokka" />
+            <TableColumn fx:id="startPointColumn" prefWidth="146.0" text="Lähtöpaikka" />
+            <TableColumn fx:id="endPointColumn" minWidth="0.0" prefWidth="120.0" text="Määränpää" />
+            <TableColumn fx:id="distanceColumn" prefWidth="132.0" text="Reitin pituus" />
+        </columns>
+      </TableView>
+      <GridPane vgap="5.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="274.0" />
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="169.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="233.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Paketin lisäys">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="packageChoice" prefHeight="26.0" prefWidth="192.0" promptText="Paketti" GridPane.rowIndex="1" />
+            <Label prefHeight="19.0" prefWidth="305.0" text="Luo uusi paketti" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="newPackageBt" mnemonicParsing="false" onAction="#loadPackageScene" text="Luo uusi paketti" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <HBox fx:id="shipHbox" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="2">
+               <children>
+                  <Button fx:id="addPackageBt" mnemonicParsing="false" text="Lisää paketti" />
+                  <Button fx:id="modPackageBt" mnemonicParsing="false" onAction="#loadPackageScene" text="Muokkaa pakettia" />
+               </children>
+            </HBox>
+            <Label text="Kuljetuksen lisäys/muokkaus" GridPane.columnIndex="2">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <HBox spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <Button fx:id="newShipmentBt" mnemonicParsing="false" text="Luo  kuljetus" />
+                  <Button fx:id="modShipmentBt" mnemonicParsing="false" text="Muokkaa" />
+               </children>
+            </HBox>
+            <Button fx:id="CancelBt" mnemonicParsing="false" text="Peruuta" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+            <Button fx:id="removePackBt" mnemonicParsing="false" text="Poista paketti" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>
