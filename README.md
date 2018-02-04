@@ -9,7 +9,7 @@ Ohjelma kehitettiin Eclipse kehitysympäristössä ja toimiakseen ohjelma vaati 
 **Ohjeet repositoryn lataukseen ja ohjelman suoritukseen**
 
 Kloonaa repository tietokoneesi hakemistoon oheisella terminaalikomennolla
->> git clone https://NikodemusTKT@bitbucket.org/NikodemusTKT/teemut-harkka.git
+>> git clone https://github.com/NikodemiusTKT/SPC2017-Projektityo-.git
 
 Tai lataa repository käyttäen kehitysympäristösi versionhallintatyökalua
 
